@@ -4,13 +4,22 @@ import random
 import time
 from datetime import datetime
 
-st.title("Kinesis Firehose Streaming Demo")
+st.title("Kinesis Firehose Analytics Dashboard")
 
+# Empty dataframe initially
+df = pd.DataFrame(columns=["temperature", "humidity"])
+
+# Create chart
+chart = st.line_chart(df)
+
+# Store streaming data
 data = []
 
-placeholder = st.empty()
+# Placeholder for table
+table_placeholder = st.empty()
 
-for i in range(20):
+# Simulate streaming
+for i in range(30):
 
     new_data = {
         "device_id": random.randint(1000, 9999),
@@ -19,13 +28,16 @@ for i in range(20):
         "time": datetime.now().strftime("%H:%M:%S")
     }
 
+    # Append data
     data.append(new_data)
 
-    df = pd.DataFrame(data)
+    # Create dataframe
+    full_df = pd.DataFrame(data)
 
-    placeholder.dataframe(df)
-    time.sleep(1)
+    # Show table
+    table_placeholder.dataframe(full_df)
 
+    # Add rows to chart
     chart.add_rows(
         pd.DataFrame(
             {
@@ -34,13 +46,19 @@ for i in range(20):
             }
         )
     )
+
+    # Alerts
+    if new_data["temperature"] > 35:
+        st.warning("High Temperature Alert!")
+
     time.sleep(1)
-    csv = df.to_csv(index=False)
-    st.download_button(
-        label="Download Report",
-        data=csv,
-        file_name="streaming_report.csv",
-        mime="text/csv"
-    )
 
+# Download CSV Report
+csv = full_df.to_csv(index=False)
 
+st.download_button(
+    label="Download Report",
+    data=csv,
+    file_name="streaming_report.csv",
+    mime="text/csv"
+)

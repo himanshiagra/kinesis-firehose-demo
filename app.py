@@ -96,7 +96,10 @@ with col4:
 
 
 # Stream 5
-with col5:
+col5_container = st.container()
+
+# Stream 5
+with col5_container:
 
     st.subheader("Live Stream 5")
 

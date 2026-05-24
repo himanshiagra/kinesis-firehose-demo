@@ -9,7 +9,7 @@ st.title("Live YouTube Multi Stream Dashboard")
 
 
 youtube_urls = [
-    "https://www.youtube.com/watch?v=NphMcnU8ymU",
+    "https://www.hotstar.com/in/clips/dhurandhar-trailer/1271644240/watch?search_query=trailer",
     "https://www.youtube.com/watch?v=s0LLVQeMmtU",
     "https://www.youtube.com/watch?v=J326LIUrZM8",
     "https://www.youtube.com/watch?v=UiTvqSd52ak",
